@@ -4,11 +4,14 @@ namespace App\NativeComponents;
 
 use App\IntelCategory;
 use App\Models\IntelPost;
+use App\NativeComponents\Concerns\PaintsWindowBackground;
 use Illuminate\View\View;
 use Native\Mobile\Edge\NativeComponent;
 
 class DriverIntelReport extends NativeComponent
 {
+    use PaintsWindowBackground;
+
     public function navTitle(): string
     {
         return 'REPORT';

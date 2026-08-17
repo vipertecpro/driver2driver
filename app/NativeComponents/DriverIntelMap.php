@@ -4,6 +4,7 @@ namespace App\NativeComponents;
 
 use App\IntelCategory;
 use App\Models\IntelLocation;
+use App\NativeComponents\Concerns\PaintsWindowBackground;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\View;
 use Native\Mobile\Attributes\Computed;
@@ -12,6 +13,8 @@ use Native\Mobile\Edge\Transition;
 
 class DriverIntelMap extends NativeComponent
 {
+    use PaintsWindowBackground;
+
     /** Active pin filter — an IntelCategory value, or 'all'. */
     public string $filter = 'all';
 

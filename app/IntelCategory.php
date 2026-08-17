@@ -64,48 +64,38 @@ enum IntelCategory: string
         };
     }
 
+    /**
+     * The theme token stem carrying this category's identity colour. The
+     * pairs live in config/native-ui.php so every category gets a day and a
+     * night value automatically — hardcoded hex was dark-only and sat at
+     * about 1.2:1 on a white card.
+     */
+    private function token(): string
+    {
+        return 'cat-'.$this->value;
+    }
+
     /** Left-hand status bar on feed cards (DESIGN.md: color before text). */
     public function barClass(): string
     {
-        return match ($this) {
-            self::BuildingAccess => 'bg-[#00E475]',
-            self::CleanBathroom => 'bg-[#C5C7C9]',
-            self::DogAlert => 'bg-[#FFB4AB]',
-            self::GasPrice => 'bg-[#FFB693]',
-            self::TrafficParking => 'bg-[#FF6B00]',
-        };
+        return 'bg-theme-'.$this->token();
     }
 
     /** Icon + category label tint on feed cards. */
     public function accentClass(): string
     {
-        return match ($this) {
-            self::BuildingAccess => 'text-[#00E475]',
-            self::CleanBathroom => 'text-[#C5C7C9]',
-            self::DogAlert => 'text-[#FFB4AB]',
-            self::GasPrice => 'text-[#FFB693]',
-            self::TrafficParking => 'text-[#FFB693]',
-        };
+        return 'text-theme-'.$this->token();
     }
 
-    /** Solid fill for map pins. */
+    /** Solid fill for map pins — the same identity colour as the card stripe. */
     public function pinClass(): string
     {
-        return match ($this) {
-            self::BuildingAccess => 'bg-[#93000A]',
-            self::CleanBathroom => 'bg-[#00B059]',
-            self::DogAlert => 'bg-[#FF6B00]',
-            self::GasPrice => 'bg-[#FF6B00]',
-            self::TrafficParking => 'bg-[#FF6B00]',
-        };
+        return 'bg-theme-'.$this->token();
     }
 
     /** Icon color on top of the pin fill. */
     public function pinIconClass(): string
     {
-        return match ($this) {
-            self::BuildingAccess => 'text-[#FFDAD6]',
-            default => 'text-[#0C0E0F]',
-        };
+        return 'text-theme-on-'.$this->token();
     }
 }

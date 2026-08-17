@@ -24,6 +24,34 @@
                 @endforeach
             </column>
 
+            {{-- ── Category identity tokens ────────────────────────── --}}
+            <text font="headline" class="text-[24] text-theme-on-background">Category Identity</text>
+            <column class="w-full gap-3">
+                @foreach ($this->categoryTokens() as $token => $label)
+                    <row :native:key="'cat-'.$token" class="w-full items-center rounded-md bg-theme-{{ $token }} px-4 py-4">
+                        <text font="mono-bold" class="text-[14] text-theme-on-{{ $token }}">{{ $label }}</text>
+                        <spacer/>
+                        <text font="mono" class="shrink-0 text-[12] text-theme-on-{{ $token }}">{{ $token }}</text>
+                    </row>
+                @endforeach
+                <text font="body" class="text-[13] text-theme-secondary">
+                    Five hues that stay apart under glare — and none of them is Safety Orange,
+                    so a map pin can never read as an action.
+                </text>
+            </column>
+
+            {{-- ── Map canvas tokens ───────────────────────────────── --}}
+            <text font="headline" class="text-[24] text-theme-on-background">Map Canvas</text>
+            <column class="w-full gap-3">
+                @foreach ($this->mapTokens() as $token => $label)
+                    <row :native:key="'map-'.$token" class="w-full items-center rounded-md bg-theme-{{ $token }} px-4 py-4 border border-theme-outline-variant">
+                        <text font="mono-bold" class="text-[14] text-theme-on-surface">{{ $label }}</text>
+                        <spacer/>
+                        <text font="mono" class="shrink-0 text-[12] text-theme-on-surface">bg-theme-{{ $token }}</text>
+                    </row>
+                @endforeach
+            </column>
+
             {{-- ── Outline vs outline-variant ──────────────────────── --}}
             <text font="headline" class="text-[24] text-theme-on-background">Outline vs Outline-Variant</text>
             <row class="w-full gap-4">
@@ -88,21 +116,26 @@
 
             {{-- ── Status patterns built from the new tokens ───────── --}}
             <text font="headline" class="text-[24] text-theme-on-background">Status Patterns</text>
-            <row class="w-full rounded-lg overflow-hidden border border-theme-outline-variant bg-theme-surface">
-                <column class="w-2 self-stretch bg-theme-success"/>
-                <column class="flex-1 p-4 gap-1">
-                    <text font="mono-bold" class="text-[13] tracking-wide text-theme-on-surface-variant">VERIFIED PATTERN</text>
-                    <row class="items-center gap-2">
-                        <icon :size="16" class="text-theme-success" :ios="Ios::CheckmarkCircle" :android="Android::CheckCircle"/>
-                        <text font="body" class="text-[15] text-theme-success">text-theme-success + bg-theme-success bar</text>
+            {{-- The stripe is anchored on both vertical edges rather than
+                 stretched — `w-2 self-stretch` collapsed to an 8x8pt square. --}}
+            {{-- The house card: column container (a stack gave every card the
+                 same height), 16pt radius, hairline seam, and a stripe inset
+                 clear of the corners. --}}
+            <column class="w-full rounded-2xl border border-theme-outline-variant bg-theme-surface">
+                <row class="w-full items-center pl-6 pr-5 py-5 gap-3">
+                    <column class="flex-1 gap-1">
+                        <text font="mono-bold" class="text-[12] tracking-wide text-theme-secondary">VERIFIED PATTERN</text>
+                        <row class="items-center gap-2">
+                            <icon :size="15" class="text-theme-success" :ios="Ios::CheckmarkCircle" :android="Android::CheckCircle"/>
+                            <text font="body" class="text-[14] text-theme-success">text-theme-success + bg-theme-success bar</text>
+                        </row>
+                    </column>
+                    <row class="shrink-0 items-center h-9 px-3 rounded-full bg-theme-success">
+                        <text font="mono-bold" class="shrink-0 text-[12] text-theme-on-success">OPEN</text>
                     </row>
-                </column>
-                <column class="justify-center pr-4">
-                    <row class="items-center gap-2 px-3 py-2 rounded-lg bg-theme-success">
-                        <text font="mono-bold" class="text-[12] text-theme-on-success">OPEN</text>
-                    </row>
-                </column>
-            </row>
+                </row>
+                <column class="absolute inset-y-4 left-0 w-1.5 rounded-r-full bg-theme-success"/>
+            </column>
 
             {{-- ── Font aliases ────────────────────────────────────── --}}
             <text font="headline" class="text-[24] text-theme-on-background">Font Aliases</text>

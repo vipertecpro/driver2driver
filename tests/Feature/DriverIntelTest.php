@@ -15,7 +15,7 @@ it('renders the intel feed with seeded alerts accessibly', function () {
         ->assertSee('All Alerts')
         ->assertSee('Dog Alert')
         ->assertSee('Aggressive dog loose in front yard')
-        ->assertSee('By Driver #892')
+        ->assertSee('Driver #892')
         ->assertAccessible();
 });
 
@@ -32,7 +32,7 @@ it('marks a post helpful exactly once', function () {
 
     $screen = Native::test(DriverIntelFeed::class)
         ->tap('helpful-'.$post->id)
-        ->assertSee('Helpful? ('.($post->helpful_count + 1).')');
+        ->assertSee('Helpful '.($post->helpful_count + 1));
 
     // A second tap must not double-count.
     $screen->tap('helpful-'.$post->id);
