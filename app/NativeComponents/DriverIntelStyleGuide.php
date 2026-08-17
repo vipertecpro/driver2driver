@@ -2,6 +2,8 @@
 
 namespace App\NativeComponents;
 
+use App\IntelCategory;
+use App\NativeComponents\Concerns\PaintsWindowBackground;
 use Illuminate\View\View;
 use Native\Mobile\Edge\NativeComponent;
 
@@ -13,6 +15,8 @@ use Native\Mobile\Edge\NativeComponent;
  */
 class DriverIntelStyleGuide extends NativeComponent
 {
+    use PaintsWindowBackground;
+
     /** Incremented by every demo button — proves variants stay interactive. */
     public int $presses = 0;
 
@@ -41,6 +45,37 @@ class DriverIntelStyleGuide extends NativeComponent
             'destructive' => 'Destructive',
             'success' => 'Signal Green (custom)',
             'accent' => 'Peach Accent',
+        ];
+    }
+
+    /**
+     * Category identity tokens, in the order they appear in the feed. Each
+     * carries a day and a night value, so this row is the fastest way to
+     * confirm both appearances after a palette change.
+     *
+     * @return array<string, string>
+     */
+    public function categoryTokens(): array
+    {
+        $tokens = [];
+
+        foreach (IntelCategory::cases() as $category) {
+            $tokens['cat-'.$category->value] = $category->reportLabel();
+        }
+
+        return $tokens;
+    }
+
+    /**
+     * Map canvas tokens — the surface that used to be a hardcoded light grey.
+     *
+     * @return array<string, string>
+     */
+    public function mapTokens(): array
+    {
+        return [
+            'map-surface' => 'Map Canvas',
+            'map-road' => 'Street Grid',
         ];
     }
 

@@ -40,74 +40,122 @@ return [
     'theme' => [
 
         /*
-        | High-Vis Utility — dark-first industrial palette built for outdoor
-        | visibility and night shifts. The brand commits to one look, so the
-        | light and dark blocks are identical: deep asphalt surfaces, Safety
-        | Orange reserved for primary actions, warm peach for wayfinding text.
+        | High-Vis Utility — a driver works in two conditions, so the brand
+        | ships two appearances rather than one fixed look.
+        |
+        |   Day   — a windscreen in full sun. High-luminance grounds, and
+        |           accents that go DARKER and more saturated. Glare destroys
+        |           mid-tones, so daylight is where the palette deepens; a
+        |           lightened version of the night palette washes out.
+        |   Night — a low-glare cab at 2am. Near-black asphalt grounds and
+        |           bright signal colours for a dark-adapted eye, with Safety
+        |           Orange held back for the one action worth interrupting for.
+        |
+        | Both blocks hold every `on-*` pair at 4.5:1 or better against its
+        | background, and border tokens at 3:1 as non-text UI components.
         */
         'light' => [
-            // Safety Orange — primary actions only. Must be impossible to miss.
+            // Safety Orange — primary actions only. Must be impossible to
+            // miss, and identical in both appearances: it is the brand.
             'primary' => '#FF6B00',
-            'on-primary' => '#0C0E0F',
+            'on-primary' => '#16181A',
 
-            // Asphalt Gray — muted text and secondary actions.
-            'secondary' => '#C5C7C9',
-            'on-secondary' => '#1A1C1D',
+            // Muted text and secondary actions.
+            'secondary' => '#55595C',
+            'on-secondary' => '#FFFFFF',
 
-            // Surface = cards / sheets. Background = near-black asphalt root.
-            'surface' => '#1E2021',
-            'on-surface' => '#E2E2E3',
-            'background' => '#121415',
-            'on-background' => '#E2E2E3',
+            // Surface = cards / sheets. Background = warm concrete root.
+            // The OS paints its own `systemBackground` behind the safe-area
+            // and tab-bar regions; PaintsWindowBackground pushes this value
+            // through `UI.SetBackground` so those regions match instead.
+            'surface' => '#FFFFFF',
+            'on-surface' => '#1A1715',
+            'background' => '#F4F2F0',
+            'on-background' => '#1A1715',
 
             // Elevated chips / filled inputs; warm muted labels on top.
-            'surface-variant' => '#333536',
-            'on-surface-variant' => '#E2BFB0',
+            'surface-variant' => '#E7E3E0',
+            'on-surface-variant' => '#6B4A38',
 
             // Warm brand outline for emphasized borders; neutral variant
             // for card edges and dividers. (Custom tokens — the theme map
             // is open-ended, any key works in *-theme-* classes.)
-            'outline' => '#5A4136',
-            'outline-variant' => '#3E4246',
+            'outline' => '#A66A42',
+            'outline-variant' => '#CFCAC5',
 
-            'destructive' => '#93000A',
-            'on-destructive' => '#FFDAD6',
+            'destructive' => '#B3261E',
+            'on-destructive' => '#FFFFFF',
 
-            // Signal Green — "safe to proceed": open status, verified codes.
-            'success' => '#00E475',
-            'on-success' => '#003918',
+            // "Safe to proceed": open status, verified codes.
+            'success' => '#00713C',
+            'on-success' => '#FFFFFF',
 
-            // Peach tint — headlines, wayfinding, active-state text.
-            'accent' => '#FFB693',
-            'on-accent' => '#351000',
+            // Burnt orange — headlines, wayfinding, active-state text.
+            // Safety Orange itself is only 2.4:1 on white, so accent text
+            // takes the deeper tint rather than the brand hue.
+            'accent' => '#A63C00',
+            'on-accent' => '#FFFFFF',
+
+            // Map canvas and street grid. Was a hardcoded `bg-[#9AA1A8]` —
+            // the one bright surface in an otherwise dark app.
+            'map-surface' => '#E3E6E8',
+            'map-road' => '#FFFFFF',
+
+            // Category identity. Five hues that stay apart under glare, and
+            // none of them is Safety Orange — a pin must never read as an
+            // action. Consumed via IntelCategory, never inline.
+            'cat-access' => '#00713C',
+            'on-cat-access' => '#FFFFFF',
+            'cat-bathroom' => '#00627D',
+            'on-cat-bathroom' => '#FFFFFF',
+            'cat-dog' => '#B3261E',
+            'on-cat-dog' => '#FFFFFF',
+            'cat-gas' => '#7A5400',
+            'on-cat-gas' => '#FFFFFF',
+            'cat-traffic' => '#6B3FA0',
+            'on-cat-traffic' => '#FFFFFF',
         ],
 
         'dark' => [
             'primary' => '#FF6B00',
-            'on-primary' => '#0C0E0F',
+            'on-primary' => '#16181A',
 
-            'secondary' => '#C5C7C9',
-            'on-secondary' => '#1A1C1D',
+            'secondary' => '#A8ADB1',
+            'on-secondary' => '#16181A',
 
-            'surface' => '#1E2021',
-            'on-surface' => '#E2E2E3',
-            'background' => '#121415',
-            'on-background' => '#E2E2E3',
+            'surface' => '#1B1F21',
+            'on-surface' => '#E6E8E9',
+            'background' => '#101315',
+            'on-background' => '#E6E8E9',
 
-            'surface-variant' => '#333536',
-            'on-surface-variant' => '#E2BFB0',
+            'surface-variant' => '#2B3033',
+            'on-surface-variant' => '#C2B0A6',
 
-            'outline' => '#5A4136',
-            'outline-variant' => '#3E4246',
+            'outline' => '#8A6047',
+            'outline-variant' => '#454B50',
 
             'destructive' => '#93000A',
             'on-destructive' => '#FFDAD6',
 
             'success' => '#00E475',
-            'on-success' => '#003918',
+            'on-success' => '#00351A',
 
             'accent' => '#FFB693',
             'on-accent' => '#351000',
+
+            'map-surface' => '#23282B',
+            'map-road' => '#343A3E',
+
+            'cat-access' => '#00E475',
+            'on-cat-access' => '#00351A',
+            'cat-bathroom' => '#6FD4FF',
+            'on-cat-bathroom' => '#002F3E',
+            'cat-dog' => '#FF9E93',
+            'on-cat-dog' => '#3F0A04',
+            'cat-gas' => '#FFC94D',
+            'on-cat-gas' => '#3B2A00',
+            'cat-traffic' => '#C9A6FF',
+            'on-cat-traffic' => '#23103F',
         ],
 
         // Corner radii (points / dp).

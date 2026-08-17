@@ -24,7 +24,9 @@ class IntelStackLayout extends NativeLayout
     {
         return NavBar::make()
             ->title($screen->navTitle())
-            ->backgroundColor(theme('background'))
+            // Matches IntelTabsLayout: chrome on `surface`, content on
+            // `background`, so no seam appears where the bar meets the screen.
+            ->backgroundColor(theme('surface'))
             ->textColor(theme('accent'))
             ->back();
     }
